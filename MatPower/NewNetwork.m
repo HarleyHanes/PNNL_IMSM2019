@@ -8,7 +8,7 @@ function [Network] = NewNetwork(m,iter,perturb)
 % perturb = a two entry vector with the standard deviation and variation of
 % a probability distribution for perturbing the values
 
-Network=cell(iter,3); % the cell array to hold the results
+Network=cell(iter,4); % the cell array to hold the results
 
 morig=m; % hold the original case file
 
@@ -24,6 +24,7 @@ for i=1:iter
     Network{i,2}=m.bus; %store m.bus for this iteration 
     results=runopf(m); %find the results for this iteration
     Network{i,3}=results.f; %store the total cost in cell array
+    Network{i,4}=results.success; %record if runopf converged or not; 1=converge
 end
 
 
