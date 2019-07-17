@@ -5,14 +5,15 @@ function NetworkInvestigate
 
 c=loadcase('case30');
 m=loadcase(c);
-iter=200;
-sd=.05;
+iter=100;
+sd=.3;
 mean=1;
 perturb=[mean,sd];
 
 
 
 [Networks]=NewNetwork(m,iter,perturb);
+
 
 PlotOpf(Networks);
 
