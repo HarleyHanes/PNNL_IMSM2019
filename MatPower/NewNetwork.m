@@ -7,14 +7,11 @@ function [Network] = NewNetwork(m,iter,perturb)
 % perturb = a two entry vector with the standard deviation and variation of
 % a probability distribution for perturbing the values
 
-Network=cell(iter,4); % the cell array to hold results for opf
+Network=cell(iter,5); % the cell array to hold results for opf
 
 morig=m; % hold the original case file
 
 [j,k]=size(m.bus); % find the size of the m.bus in the case file
-
-%pertval=randn(j,iter)*perturb(2)+perturb(1); % create the perturbation vector
-
 
 for i=1:iter
     m=morig; %reset to the original m case
