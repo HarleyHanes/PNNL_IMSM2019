@@ -2,6 +2,7 @@
 
 %%%graph
 function yyy= cost(x,y)
+
 xa=Network(:,1);
 ya=Network(:,3);
 yyy=cost(xa,ya);
