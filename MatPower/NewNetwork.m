@@ -19,7 +19,7 @@ pertval=randn(j,iter)*perturb(2)+perturb(1); % create the perturbation vector
 
 for i=1:iter
     m=morig; %reset to the original m case
-    m.bus(:,[3:4])=m.bus(:,[3,4])+pertval(i)*m.bus(:,[3,4]); %perturb m.bus
+    m.bus(:,[3:4])=pertval(i)*m.bus(:,[3,4]); %perturb m.bus
     Network{i,1}=pertval(i); %store perturbation value for this iteration
     Network{i,2}=m.bus; %store m.bus for this iteration 
     results=runopf(m); %find the results for this iteration
