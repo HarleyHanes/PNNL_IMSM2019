@@ -7,7 +7,7 @@ function [Network] = NewNetwork(m,iter,perturb)
 % perturb = a two entry vector with the standard deviation and variation of
 % a probability distribution for perturbing the values
 
-Network=cell(iter,5); % the cell array to hold results for opf
+Network=cell(iter,4); % the cell array to hold results for opf
 
 morig=m; % hold the original case file
 
