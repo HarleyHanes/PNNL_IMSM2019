@@ -43,15 +43,14 @@ hold off
 
 figure(2)
 h = histogram2(Perturb,Cost);
-title('Histogram of pertubation and cost')
+title('Histogram of pertubation and cost - for success points')
 xlabel('pertubation');
 ylabel('cost');
 
 
 figure(3)
 h = histogram2(PerturbF,CostF);
-title('Histogram of pertubation and cost')
+title('Histogram of pertubation and cost - for failure points')
 xlabel('pertubation');
 ylabel('cost');
 end
-
