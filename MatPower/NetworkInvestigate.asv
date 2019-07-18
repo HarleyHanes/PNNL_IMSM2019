@@ -27,15 +27,15 @@ sd=.1;                                          %Standard Deviation of
                                                 %pertubations for normal
 mean=1;                                         %Mean of perturbations
                                                 %for normal distribution
-delta=.5;                                       %Range of Perturbation for 
-                                                %for uniform distribution
+delta=.5
 
 %% Model Generation and Solving
 if strcmpi(Testtype,'norm')
     perturb=[mean,sd];
-    Networks=NewNetworkNorm(m,iter,perturb,mpopt);
+    [Networks]=NewNetworkNorm(m,iter,perturb,mpopt);
 elseif strcmpi(Testtype,'unif')
-    Networks=NewNetworkUnif(m,iter,delta,mpopt);
+    perturb=.5;
+    [Networks]=NewNetworkUnif(m,iter,perturb,mpopt);
 end
 
 %% Data Outputing 

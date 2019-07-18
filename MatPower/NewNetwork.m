@@ -1,4 +1,4 @@
-function [Network] = NewNetwork(m,iter,perturb)
+function [Network] = NewNetworkNorm(m,iter,perturb)
 %NewNetwork - making perturbations of the data in the power cases
 
 % m = case number

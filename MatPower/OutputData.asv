@@ -7,9 +7,7 @@ SuccessFolder=strcat([folderpath,'\\',TestID,...  %File location for Successes
     '\\','Success']);
 FailureFolder=strcat([folderpath,'\\',TestID,...  %File location for Failures
     '\\','Failure']);
-f=waitbar(0,'Saving Results'); %Loads waitbar
-
-%%Uniform Distribution
+f=waitbar(0,'Saving Results');                    %Loads waitbar
 if strcmpi(testtype,'Unif')==1
     for i=1:iter(1)
         if rem(i*iter(1)/10,iter(1))==0
@@ -35,15 +33,15 @@ if strcmpi(testtype,'Unif')==1
             k=k+1;
         end
     end
+    
     %Saving Cell Arrays
     file=strcat(SuccessFolder,'\\','UnifTestSuccessCell.mat');
     save(file,'UnifTestSuccessCell');
     file=strcat(FailureFolder,'\\','UnifTestFailureCell.mat');
     save(file,'UnifTestFailureCell');
-end
-%% Normal Distribution
+%%Normals
     %See Notes above for line-by-line notes
-if strcmpi(testtype,'Norm')==1
+elseif strcmpi(testtype,'Norm')==1
     for i=1:iter(1)
         if rem(i*iter(1)/10,iter(1))==0
             waitbar(i/iter(1),f,'Saving Results');
