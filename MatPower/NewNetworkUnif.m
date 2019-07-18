@@ -1,4 +1,4 @@
-function [results,Network] = NewNetworkUnif(m,iter,a)
+function [Network] = NewNetworkUnif(m,iter,a)
 %NewNetwork - making perturbations of the data in the power cases
 
 % m = case number
