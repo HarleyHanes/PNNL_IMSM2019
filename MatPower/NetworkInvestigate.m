@@ -1,22 +1,44 @@
-function NetworkInvestigate
-%UNTITLED3 Main function file for perturbing MatPower Cases to investigate
-%impacts on cost
-%   Determines settings for network perturbation and iteration
+%NetworkInvestigate
+%Main file for writing data sets from Matpower cases by perturbing bus P
+%and Q values and writing them to harddrive
+%SubFiles
+    % NewNetworkNorm
+    % NewNetworkUnif
+    % OutputData
 
-c=loadcase('case30');
+%% Problem Setup
+Testtype='Norm';                                %Determines whether perturbations 
+                                                %follow normal or uniform 
+                                                %distribution
+                                                
+folderpath=['C:\\Users\\X1\\OneDrive\\'...      %Folder Location to store
+    'Documents\\Student Research\\SAMSI ISSM']; %data
+
+TestID='case300Norm4000Sample';                 %Name of data folder
+
+c=loadcase('case300');                          %MatPower Case ID
 m=loadcase(c);
-iter=5000;
-sd=.5;
-mean=1;
-perturb=[mean,sd];
+iter=25000;                                     %Number of Different MatPower 
+                                                %perturbations to run
+mpopt=mpoption(['verbose',0,'out.all',0,...     %MatPower Options, see Manual
+    'out.suppress_detail',1]);                  %for further details
 
+sd=.1;                                          %Standard Deviation of
+                                                %pertubations for normal
+mean=1;                                         %Mean of perturbations
+                                                %for normal distribution
+delta=.5;                                       %Range of Perturbation for 
+                                                %for uniform distribution
 
-
-[Networks]=NewNetwork(m,iter,perturb);
-
-OutputData(Networks);
-
-%PlotOpf(Networks);
-
+%% Model Generation and Solving
+if strcmpi(Testtype,'norm')
+    perturb=[mean,sd];
+    Networks=NewNetworkNorm(m,iter,perturb,mpopt);
+elseif strcmpi(Testtype,'unif')
+    Networks=NewNetworkUnif(m,iter,delta,mpopt);
 end
+
+%% Data Outputing 
+OutputData(Networks,Testtype,folderpath,TestID);
+
 
