@@ -1,11 +1,10 @@
-function [results,Network] = NewNetwork(m,iter)
+function [results,Network] = NewNetworkUnif(m,iter,a)
 %NewNetwork - making perturbations of the data in the power cases
 
 % m = case number
 % iter = how many different perturbations we want to test
 
-% perturb = a two entry vector with the standard deviation and variation of
-% a probability distribution for perturbing the values
+% a = decimal form of the perturbation interval
 
 Network=cell(iter,5); % the cell array to hold results for opf
 
@@ -16,8 +15,8 @@ morig=m; % hold the original case file
 for i=1:iter
     m=morig; %reset to the original m case
     for n=1:j
-        pertval3=(rand()+.5)*morig(n,3); % create the perturbation vector
-        pertval4=(rand()+.5)*morig(n,4); % create the perturbation vector
+        pertval3=a*(2*rand()-1)+1; % create the perturbation vector
+        pertval4=a*(2*rand()-1)+1; % create the perturbation vector
         m.bus(n,3)=pertval3*m.bus(n,3); % perturb m.bus column 3
         m.bus(n,4)=pertval4*m.bus(n,4); % perturb m.bus column 4
     end
