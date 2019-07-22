@@ -51,16 +51,20 @@ for i=0:c
 end
 save(savelocation,'SuccessStruct','-v7.3')
 %% Writing Structures to Cell Arrays
-c=4999;
-ResultsCell300=cell(c+1,1);
-ResultsCell300{1}=runopf('case300');
+c=20434;
+%ResultsCell300=cell(c+1,1);
+%ResultsCell300{1}=runopf('case300');
 folderpath=['C:\\Users\\X1\\OneDrive\\'...      %Folder Location to store
     'Documents\\Student Research\\SAMSI ISSM']; %data
 TestID='case300Norm25000Sample';
 loadlocation=strcat(folderpath,'\\',TestID,'\\','Success');
+savelocation=strcat(folderpath,'\\',TestID,'\\','SuccessTrimmed');
 for i=0:c
     f=strcat(loadlocation,'\\',sprintf('NormTestSuccess%d',i));
     load(f);
-    ResultsCell300{i+2}=Results;
+    %ResultsCell300{i+2}=Results;
+    Results=rmfield(Results,delete);
+    d=strcat(savelocation,'\\',sprintf('NormTestSuccess%d',i));
+    save(d,'Results')
 end
     

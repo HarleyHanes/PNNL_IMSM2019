@@ -14,11 +14,11 @@ Testtype='Norm';                                %Determines whether perturbation
 folderpath=['C:\\Users\\X1\\OneDrive\\'...      %Folder Location to store
     'Documents\\Student Research\\SAMSI ISSM']; %data
 
-TestID='case300Norm25000Sample';                 %Name of data folder
+TestID='TestingFormat';                 %Name of data folder
 
-c=loadcase('case300');                          %MatPower Case ID
+c=loadcase('case3375wp');                          %MatPower Case ID
 m=loadcase(c);
-iter=25000;                                     %Number of Different MatPower 
+iter=100;                                     %Number of Different MatPower 
                                                 %perturbations to run
 %mpopt=mpoption(['verbose',0,'out.all',0,...     %MatPower Options, see Manual
 %    'out.suppress_detail',1]);                  %for further details
@@ -31,16 +31,29 @@ mean=1;                                         %Mean of perturbations
                                                 %for normal distribution
 delta=.5;                                       %Range of Perturbation for 
                                                 %for uniform distribution
+Trim=1;                                         %trims results structures to
+                                                %reduce file size, enter as
+                                                %1 to trim, 0 to not.
+                                                %NOTE: Trimming deletes
+                                                %fields from results
+                                                %structures that may be
+                                                %important to other
+                                                %functions or future
+                                                %analysis. See below for
+                                                %the structure elements
+                                                %that are deleted
+delete={'order','om','x','mu','var','nle','nli','qdc','et','raw'};
 
 %% Model Generation and Solving
 if strcmpi(Testtype,'norm')
     perturb=[mean,sd];
-    Networks=NewNetworkNorm(m,iter,perturb,mpopt);
+    [Networks, time]=NewNetworkNorm(m,iter,perturb,mpopt);
 elseif strcmpi(Testtype,'unif')
-    Networks=NewNetworkUnif(m,iter,delta,mpopt);
+    Networks=NewNetworkUnif(m,iter,delta,mpopt,Trim,delete);
 end
 
 %% Data Outputing 
-OutputData(Networks,Testtype,folderpath,TestID,Case);
+%OutputData(Networks,Testtype,folderpath,TestID,Case);
+close all
 
 

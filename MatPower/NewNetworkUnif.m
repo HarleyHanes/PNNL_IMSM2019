@@ -1,4 +1,4 @@
-function [Network] = NewNetworkUnif(m,iter,a)
+function [Network] = NewNetworkUnif(m,iter,a,mpopt,Trim,delete)
 %NewNetwork - making perturbations of the data in the power cases
 
 % m = case number
@@ -24,7 +24,13 @@ for i=1:iter
         m.bus(n,4)=pertval4*m.bus(n,4); % perturb m.bus column 4
     end
     
-    results=runopf(m); %find the results for this iteration for opf
+    results=runopf(m,mpopt); %find the results for this iteration for opf
+    if Trim==1
+        if i==1
+            delete=delete(isfield(results,delete));
+        end
+        results=rmfield(results,delete);
+    end
     Network{i,1}=results; %store perturbation value for this iteration
     Network{i,2}=m; %store m for this iteration 
     Network{i,3}=results.f; %store the total cost in cell array for opf

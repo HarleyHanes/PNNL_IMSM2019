@@ -41,12 +41,12 @@ if strcmpi(testtype,'Unif')==1
         end
     end
     %Saving Cell Arrays
-    file=strcat(SuccessFolder,'\\','UnifTestSuccessCell.mat');
-    save(file,'UnifTestSuccessCell','-v7.3');
+%     file=strcat(SuccessFolder,'\\','UnifTestSuccessCell.mat');
+%     save(file,'UnifTestSuccessCell','-v7.3');
     %file=strcat(SuccessFolder,'\\','SuccessStruct.mat');
     %save(file,'SuccessStruct');
-    file=strcat(FailureFolder,'\\','UnifTestFailureCell.mat');
-    save(file,'UnifTestFailureCell','-v7.3');
+%     file=strcat(FailureFolder,'\\','UnifTestFailureCell.mat');
+%     save(file,'UnifTestFailureCell','-v7.3');
     %file=strcat(FailureFolder,'\\','FailureStruct.mat');
     %save(file,'FailureStruct');
 end
@@ -74,13 +74,13 @@ if strcmpi(testtype,'Norm')==1
             %FailureStruct(k+1)=Network{i,1};
             k=k+1;
         end
-    end
-    file=strcat(SuccessFolder,'\\','NormTestSuccessCell.mat');
-    save(file,'NormTestSuccessCell','-v7.3');
+     end
+%     file=strcat(SuccessFolder,'\\','NormTestSuccessCell.mat');
+%     save(file,'NormTestSuccessCell','-v7.3');
 %     file=strcat(SuccessFolder,'\\','SuccessStruct.mat');
 %     save(file,'SuccessStruct');
-    file=strcat(FailureFolder,'\\','NormTestFailureCell.mat');
-    save(file,'NormTestFailureCell','-v7.3');
+%     file=strcat(FailureFolder,'\\','NormTestFailureCell.mat');
+%     save(file,'NormTestFailureCell','-v7.3');
 %     file=strcat(FailureFolder,'\\','FailureStruct.mat');
 %     save(file,'FailureStruct');
 end
