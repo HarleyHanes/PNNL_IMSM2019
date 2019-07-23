@@ -12,20 +12,21 @@ Testtype='Norm';                                %Determines whether perturbation
                                                 %distribution
                                                 
 folderpath=['C:\\Users\\X1\\OneDrive\\'...      %Folder Location to store
-    'Documents\\Student Research\\SAMSI ISSM']; %data
+    'Documents\\Student Research\\SAMSI ISSM'];
+  %data
 
-TestID='TestingFormat';                 %Name of data folder
+TestID='case300Norm5000Sample';                 %Name of data folder
 
-c=loadcase('case3375wp');                          %MatPower Case ID
+c=loadcase('case300');                          %MatPower Case ID
 m=loadcase(c);
-iter=100;                                     %Number of Different MatPower 
+iter=5000;                                     %Number of Different MatPower 
                                                 %perturbations to run
 %mpopt=mpoption(['verbose',0,'out.all',0,...     %MatPower Options, see Manual
 %    'out.suppress_detail',1]);                  %for further details
 
 mpopt=mpoption('verbose',0,'out.all',0,'out.suppress_detail',1);
 Case=runopf(c,mpopt);
-sd=.1;                                          %Standard Deviation of
+sd=.2;                                          %Standard Deviation of
                                                 %pertubations for normal
 mean=1;                                         %Mean of perturbations
                                                 %for normal distribution
@@ -47,13 +48,16 @@ delete={'order','om','x','mu','var','nle','nli','qdc','et','raw'};
 %% Model Generation and Solving
 if strcmpi(Testtype,'norm')
     perturb=[mean,sd];
-    [Networks, time]=NewNetworkNorm(m,iter,perturb,mpopt);
+    [time]=NewNetworkNormSave(m,iter,perturb,mpopt,folderpath, TestID, Trim,delete);
 elseif strcmpi(Testtype,'unif')
     Networks=NewNetworkUnif(m,iter,delta,mpopt,Trim,delete);
+elseif strcmpi(Testtype,'gen')
+    [Networks, time]=GenInvestigate(m,iter,perturb,mpopt,folderpath, TestID, Trim, delete);
 end
 
 %% Data Outputing 
 %OutputData(Networks,Testtype,folderpath,TestID,Case);
 close all
+
 
 
