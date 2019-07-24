@@ -1,4 +1,4 @@
-function [time] = NewNetworkNormSave(m,iter,perturb,mpopt,folderpath, TestID, Trim,delete)
+function [time] = NewNetworkNormSave300(m,iter,perturb,mpopt,folderpath, TestID, Trim,delete)
 %NewNetwork - making perturbations of the data in the power cases
 
 % m = case number
@@ -21,16 +21,23 @@ TrimFolderF=strcat([folderpath,'\\',TestID,...  %File location for Successes
     '\\','FailureTrimmed']);
 f=waitbar(0,'Solving Bus Matrices');
 
-x=2108;y=2892;
+x=0;y=0;
 averagetime=0;
 tottime=0;
 for i=1:iter
     m=morig; %reset to the original m case
     for n=1:j
-        pertval3=randn()*perturb(2)+perturb(1); % create the perturbation vector
-        pertval4=randn()*perturb(2)+perturb(1); % create the perturbation vector
-        m.bus(n,3)=pertval3*m.bus(n,3); % perturb m.bus column 3
-        m.bus(n,4)=pertval4*m.bus(n,4); % perturb m.bus column 4
+        if m.bus(n,3)==0 && m.bus(n,4)==0
+            Ppert=exprnd(1/15);
+            Qpert=exprnd(1/5);
+            m.bus(n,3)=Ppert;
+            m.bus(n,4)=Qpert;
+        else
+            pertval3=randn()*perturb(2)+perturb(1); % create the perturbation vector
+            pertval4=randn()*perturb(2)+perturb(1); % create the perturbation vector
+            m.bus(n,3)=pertval3*m.bus(n,3); % perturb m.bus column 3
+            m.bus(n,4)=pertval4*m.bus(n,4); % perturb m.bus column 4
+        end
     end
     if rem(i*iter/10,iter)==0
         waitbar(i/iter,f,'Solving Bus Matrices');

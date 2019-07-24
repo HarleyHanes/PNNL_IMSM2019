@@ -15,7 +15,7 @@ folderpath=['C:\\Users\\X1\\OneDrive\\'...      %Folder Location to store
     'Documents\\Student Research\\SAMSI ISSM'];
   %data
 
-TestID='case300Norm5000Sample';                 %Name of data folder
+TestID='case300Weird5000Sample';                 %Name of data folder
 
 c=loadcase('case300');                          %MatPower Case ID
 m=loadcase(c);
